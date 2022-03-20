@@ -62,8 +62,31 @@ class HomeController extends Controller
         ]);
     }
 
+    public function refreshXeroToken(Request $request){
+        
+        //refresh token if necessary
+        $accessToken = new AccessToken(collect(json_decode($request->session()->get('access_token')))->toArray());
+        //dd($accessToken->hasExpired());
+        if ($accessToken->hasExpired()) {
+            $accessTokens = $this->getOAuth2()->refreshAccessToken($accessToken);
+            
+            $request->session()->forget('access_token');
+            $request->session()->put('access_token', json_encode($accessTokens));
+            //dd($request->session()->get('access_token'));
+            DB::table('user_organizations')->where('tenant_id', $request->session()->get('xeroOrg')->tenant_id)->update([
+                'xero_access_token' => json_encode($accessTokens)
+            ]);
+        }
+    }
+
     public function saveUser(Request $request){
         $input = $request->all();
+
+        if(collect($request->session()->get('accessToken'))->isEmpty() ){
+            return redirect('/home');
+        }else{
+            $this->refreshXeroToken($request);
+        }
 
         $validated = $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
