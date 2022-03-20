@@ -63,9 +63,9 @@ class HomeController extends Controller
     }
 
     public function refreshXeroToken(Request $request){
-        
+        //dd($request->session()->get('access_token'));
         //refresh token if necessary
-        $accessToken = new AccessToken(collect(json_decode($request->session()->get('access_token') ))->toArray());
+        $accessToken = new AccessToken(collect(json_decode( json_encode($request->session()->get('accessToken')) ))->toArray());
         //dd($accessToken->hasExpired());
         if ($accessToken->hasExpired()) {
             $accessTokens = $this->getOAuth2()->refreshAccessToken($accessToken);
