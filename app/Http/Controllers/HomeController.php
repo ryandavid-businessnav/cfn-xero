@@ -65,7 +65,7 @@ class HomeController extends Controller
     public function refreshXeroToken(Request $request){
         
         //refresh token if necessary
-        $accessToken = new AccessToken(collect(json_decode($request->session()->get('accessToken.access_token')))->toArray());
+        $accessToken = new AccessToken(collect(json_decode($request->session()->get('access_token') ))->toArray());
         //dd($accessToken->hasExpired());
         if ($accessToken->hasExpired()) {
             $accessTokens = $this->getOAuth2()->refreshAccessToken($accessToken);
@@ -81,6 +81,8 @@ class HomeController extends Controller
 
     public function saveUser(Request $request){
         $input = $request->all();
+
+        $request->session()->put('access_token', $request->session()->get('accessToken.access_token'));
 
         if(collect($request->session()->get('accessToken'))->isEmpty() ){
             return redirect('/home');
@@ -151,6 +153,7 @@ class HomeController extends Controller
         $request->session()->forget('tenantId');
         $request->session()->forget('userInfo');
         $request->session()->forget('accessToken');
+        $request->session()->forget('access_token');
 
         return redirect('/home')->with('status', 'User register success!');
     }
