@@ -117,10 +117,10 @@
 
                                 <div class="col-md-6">
                                     <select class="form-control" name="currency">
+                                        <option>AUD</option>
                                         <option>EUR</option>
                                         <option>USD</option>
                                         <option>NZD</option>
-                                        <option>AUD</option>
                                         <option>GBP</option>
                                         <option>MXN</option>
                                         <option>CAD</option>
