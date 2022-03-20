@@ -110,28 +110,41 @@ class HomeController extends Controller
         $user->is_phone_verified = 0;
         $user->save();
 
-        $businessSetting = new BusinessSetting();
-        $businessSetting->user_id = $user->id;
-        $businessSetting->company_name = $input['businessName'];
-        $businessSetting->address = $input['address'];
-        $businessSetting->no_of_employees = $input['numberOfEmployees'];
-        $businessSetting->currency = $input['currency'];
-        $businessSetting->currency = $input['currency'];
-        $businessSetting->trading_name = $input['businessName'];
-        $businessSetting->xero_access_token = $request->session()->get('accessToken.access_token');
-        $businessSetting->xero_refresh_token = $request->session()->get('accessToken.refresh_token');
-        $businessSetting->xero_tenant_name = $request->session()->get('tenantInfo.tenantName');
-        $businessSetting->xero_tenant_id = $request->session()->get('tenantId');
-        $businessSetting->save();
+        $xeroCheck = DB::table('business_settings')->where(['xero_tenant_id' => $request->session()->get('tenantId')])->first();
+        if(collect($xeroCheck)->isEmpty()){
 
-        $org = new Organisation();
-        $org->business_form_id = $businessSetting->id;
-        $org->user_id = $user->id;
-        $org->role = 'owner';
-        $org->read_access = 1;
-        $org->write_access = 1;
-        $org->is_admin = 1;
-        $org->save();
+            $businessSetting = new BusinessSetting();
+            $businessSetting->user_id = $user->id;
+            $businessSetting->company_name = $input['businessName'];
+            $businessSetting->address = $input['address'];
+            $businessSetting->no_of_employees = $input['numberOfEmployees'];
+            $businessSetting->currency = $input['currency'];
+            $businessSetting->currency = $input['currency'];
+            $businessSetting->trading_name = $input['businessName'];
+            $businessSetting->xero_access_token = $request->session()->get('accessToken.access_token');
+            $businessSetting->xero_refresh_token = $request->session()->get('accessToken.refresh_token');
+            $businessSetting->xero_tenant_name = $request->session()->get('tenantInfo.tenantName');
+            $businessSetting->xero_tenant_id = $request->session()->get('tenantId');
+            $businessSetting->save();
+
+            $org = new Organisation();
+            $org->business_form_id = $businessSetting->id;
+            $org->user_id = $user->id;
+            $org->role = 'owner';
+            $org->read_access = 1;
+            $org->write_access = 1;
+            $org->is_admin = 1;
+            $org->save();
+        }else{
+            $org = new Organisation();
+            $org->business_form_id = $xeroCheck->id;
+            $org->user_id = $user->id;
+            $org->role = 'member';
+            $org->read_access = 1;
+            $org->write_access = 1;
+            $org->is_admin = 1;
+            $org->save();
+        }
 
         $request->session()->forget('xeroOrg');
         $request->session()->forget('tenantInfo');

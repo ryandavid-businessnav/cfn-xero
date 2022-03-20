@@ -74,8 +74,8 @@ class XeroController extends Controller
                 new AccessToken(collect($accessToken)->toArray()),
                 $tenant->tenantId
             );
-            $xeroCheck = DB::table('business_settings')->where(['xero_tenant_id' => $tenant->tenantId])->first();
-            if(collect($xeroCheck)->isEmpty()){
+            // $xeroCheck = DB::table('business_settings')->where(['xero_tenant_id' => $tenant->tenantId])->first();
+            // if(collect($xeroCheck)->isEmpty()){
                 $org = $xero->organisations()->first();
                 $contact = $xero->contacts;
                 $user = $xero->users()->first();
@@ -89,9 +89,9 @@ class XeroController extends Controller
                 $request->session()->put('accessToken', collect($accessToken)->toArray());
 
                 return redirect('/home')->with('status', 'Organisation update success!');
-            }else{
-                return redirect('/home')->with('status', 'Organisation already exist!');
-            }
+            // }else{
+            //     return redirect('/home')->with('status', 'Organisation already exist!');
+            // }
         }
         
     }
