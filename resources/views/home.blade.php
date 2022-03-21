@@ -44,7 +44,7 @@
                                     <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="firstName" type="text" class="form-control" name="firstName" value="{{ session('jwtPayload.family_name') }}" required autocomplete="name" autofocus>
+                                        <input id="firstName" type="text" class="form-control" name="firstName" value="{{ session('jwtPayload.given_name') }}" required autocomplete="name" autofocus>
                                     </div>
                                 </div>
 
@@ -52,7 +52,7 @@
                                     <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Last Name') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="lastName" type="text" class="form-control" name="lastName" value="{{ session('jwtPayload.given_name') }}" required autocomplete="name" autofocus>
+                                        <input id="lastName" type="text" class="form-control" name="lastName" value="{{ session('jwtPayload.family_name') }}" required autocomplete="name" autofocus>
                                     </div>
                                 </div>
                                 
