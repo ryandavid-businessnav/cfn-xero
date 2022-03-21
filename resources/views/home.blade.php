@@ -36,114 +36,123 @@
                         {{-- dd(session('userInfo')) --}}
                         <form method="POST" action="/save-user">
                             @csrf
-
-                            <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Business Name') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="businessName" type="text" class="form-control @error('name') is-invalid @enderror" name="businessName" value="{{ session('xeroOrg.Name') }}" required autocomplete="name" autofocus>
+                            <fieldset>
+                                <div class="text-center row mb-3">
+                                    <legend><span class="number">1</span>Basic Info</legend>
                                 </div>
-                            </div>
+                                <div class="row mb-3">
+                                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
 
-                            <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="firstName" type="text" class="form-control" name="firstName" value="{{ session('userInfo.FirstName') }}" required autocomplete="name" autofocus>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Last Name') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="lastName" type="text" class="form-control" name="lastName" value="{{ session('userInfo.LastName') }}" required autocomplete="name" autofocus>
-                                </div>
-                            </div>
-                            
-
-                            <div class="row mb-3">
-                                <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ session('userInfo.EmailAddress') }}" required autocomplete="email">
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" value="{{ session('xeroOrg.Phones.0.PhoneCountryCode').session('xeroOrg.Phones.0.PhoneNumber') }}" required autocomplete="name" autofocus>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="address" type="text" class="form-control" name="address" value="{{ session('xeroOrg.Addresses.0.AddressLine1').' '.session('xeroOrg.Addresses.0.City').' '.session('xeroOrg.Addresses.0.Region').','.session('xeroOrg.Addresses.0.Country').' '.session('xeroOrg.Addresses.0.PostalCode') }}" required autocomplete="name" autofocus>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Number of Employees') }}</label>
-
-                                <div class="col-md-6">
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios1" value="0-50" checked>
-                                      <label class="form-check-label" for="exampleRadios1">
-                                        0-50
-                                      </label>
-                                    </div>
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios2" value="50-100">
-                                      <label class="form-check-label" for="exampleRadios2">
-                                        50-100
-                                      </label>
-                                    </div>
-
-                                    <div class="form-check">
-                                      <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios2" value="100+">
-                                      <label class="form-check-label" for="exampleRadios2">
-                                        100+
-                                      </label>
+                                    <div class="col-md-6">
+                                        <input id="firstName" type="text" class="form-control" name="firstName" value="{{ session('jwtPayload.family_name') }}" required autocomplete="name" autofocus>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="row mb-3">
-                                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Default Currency') }}</label>
+                                <div class="row mb-3">
+                                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Last Name') }}</label>
 
-                                <div class="col-md-6">
-                                    <select class="form-control" name="currency">
-                                        <option>AUD</option>
-                                        <option>EUR</option>
-                                        <option>USD</option>
-                                        <option>NZD</option>
-                                        <option>GBP</option>
-                                        <option>MXN</option>
-                                        <option>CAD</option>
-                                        <option>OTHER</option>
-                                    </select>
+                                    <div class="col-md-6">
+                                        <input id="lastName" type="text" class="form-control" name="lastName" value="{{ session('jwtPayload.given_name') }}" required autocomplete="name" autofocus>
+                                    </div>
                                 </div>
-                            </div>
+                                
 
-                            <div class="row mb-3">
-                                <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+                                <div class="row mb-3">
+                                    <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                    <div class="col-md-6">
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ session('jwtPayload.email') }}" required autocomplete="email">
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </fieldset>
+                                
+                             <fieldset>
+                                <div class="text-center row mb-3">
+                                    <legend><span class="number">1</span>Your Business</legend>
                                 </div>
-                            </div>
+                                <div class="row mb-3">
+                                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Business Name') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="businessName" type="text" class="form-control @error('name') is-invalid @enderror" name="businessName" value="{{ session('xeroOrg.Name') }}" required autocomplete="name" autofocus>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" value="{{ session('phoneNumber') }}" required autocomplete="name" autofocus>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="address" type="text" class="form-control" name="address" value="{{ session('xeroOrg.Addresses.0.AddressLine1').' '.session('xeroOrg.Addresses.0.City').' '.session('xeroOrg.Addresses.0.Region').','.session('xeroOrg.Addresses.0.Country').' '.session('xeroOrg.Addresses.0.PostalCode') }}" required autocomplete="name" autofocus>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Number of Employees') }}</label>
+
+                                    <div class="col-md-6">
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios1" value="0-50" checked>
+                                          <label class="form-check-label" for="exampleRadios1">
+                                            0-50
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios2" value="50-100">
+                                          <label class="form-check-label" for="exampleRadios2">
+                                            50-100
+                                          </label>
+                                        </div>
+
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios2" value="100+">
+                                          <label class="form-check-label" for="exampleRadios2">
+                                            100+
+                                          </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Default Currency') }}</label>
+
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="currency">
+                                            <option>AUD</option>
+                                            <option>EUR</option>
+                                            <option>USD</option>
+                                            <option>NZD</option>
+                                            <option>GBP</option>
+                                            <option>MXN</option>
+                                            <option>CAD</option>
+                                            <option>OTHER</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                                    <div class="col-md-6">
+                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                    </div>
+                                </div>
+                            </fieldset>
 
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">

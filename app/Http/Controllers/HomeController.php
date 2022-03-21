@@ -37,10 +37,31 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+    public function formatNum($num){
+        return sprintf("%+d",$num);
+    }
+
     public function index(Request $request)
     {
         //dd( $request->session()->get('xeroOrg.Phones.0.PhoneNumber'));
-        // dd(($request->session()->get('tenantInfo')));
+        //dd(($request->session()->get('accessToken.id_token')));
+
+        $token = $request->session()->get('accessToken.id_token');
+
+        $tokenParts = explode(".", $token);  
+        $tokenHeader = base64_decode($tokenParts[0]);
+        $tokenPayload = base64_decode($tokenParts[1]);
+        $jwtHeader = json_decode($tokenHeader);
+        $jwtPayload = json_decode($tokenPayload);
+        
+        $phoneNumber = $this->formatNum(str_replace(' ', '', session('xeroOrg.Phones.0.PhoneCountryCode').session('xeroOrg.Phones.0.PhoneNumber')));
+
+        
+        $request->session()->put('phoneNumber', $phoneNumber);
+        $request->session()->put('jwtPayload', collect($jwtPayload)->toArray());
+
+        //dd($request->session()->get('jwtPayload'));
         // $contact = $xero->contacts()->find('34xxxx6e-7xx5-2xx4-bxx5-6123xxxxea49');
         //$tenants = $this->getOAuth2()->getTenants(json_encode($request->session()->get('accessToken')));
         //dd($tenants);
@@ -154,6 +175,8 @@ class HomeController extends Controller
         $request->session()->forget('userInfo');
         $request->session()->forget('accessToken');
         $request->session()->forget('access_token');
+        $request->session()->forget('jwtPayload');
+        $request->session()->forget('phoneNumber');
 
         return redirect('/home')->with('status', 'User register success!');
     }
