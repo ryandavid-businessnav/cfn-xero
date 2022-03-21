@@ -55,7 +55,7 @@ class HomeController extends Controller
         $jwtHeader = json_decode($tokenHeader);
         $jwtPayload = json_decode($tokenPayload);
         
-        $phoneNumber = $this->formatNum(str_replace(' ', '', session('xeroOrg.Phones.0.PhoneCountryCode').session('xeroOrg.Phones.0.PhoneNumber')));
+        $phoneNumber = str_replace(' ', '', session('xeroOrg.Phones.0.PhoneCountryCode').session('xeroOrg.Phones.0.PhoneNumber'));
 
         
         $request->session()->put('phoneNumber', $phoneNumber);
@@ -127,7 +127,7 @@ class HomeController extends Controller
         $user->password = Hash::make($input['password']);
         $user->first_name = $input['firstName'];
         $user->last_name = $input['lastName'];
-        $user->mobile_number = $input['phoneNumber'];
+        $user->mobile_number = $input['userPhoneNumber'];
         $user->is_active = 1;
         $user->is_verified = 0;
         $user->is_phone_verified = 0;
@@ -143,6 +143,7 @@ class HomeController extends Controller
             $businessSetting->no_of_employees = $input['numberOfEmployees'];
             $businessSetting->currency = $input['currency'];
             $businessSetting->currency = $input['currency'];
+            $businessSetting->mobile_number = $input['phoneNumber'];
             $businessSetting->trading_name = $input['businessName'];
             $businessSetting->xero_access_token = $request->session()->get('accessToken.access_token');
             $businessSetting->xero_refresh_token = $request->session()->get('accessToken.refresh_token');
