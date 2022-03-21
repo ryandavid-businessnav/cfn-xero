@@ -77,7 +77,6 @@ class XeroController extends Controller
             // $xeroCheck = DB::table('business_settings')->where(['xero_tenant_id' => $tenant->tenantId])->first();
             // if(collect($xeroCheck)->isEmpty()){
                 $org = $xero->organisations()->first();
-                $contact = $xero->contacts;
                 $user = $xero->users()->first();
                 //dd($user);
                 // $contact = $xero->contacts()->find($tenant->id);
