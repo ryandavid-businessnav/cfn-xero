@@ -46,20 +46,23 @@ class HomeController extends Controller
     {
         //dd( $request->session()->get('xeroOrg.Phones.0.PhoneNumber'));
         //dd(($request->session()->get('accessToken.id_token')));
+        if($request->session()->get('accessToken.id_token')){
+            $jsonToken = $request->session()->get('accessToken.id_token');
+            $token = ($jsonToken);
+            
+            $tokenParts = explode(".", $token);  
+            $tokenHeader = base64_decode($tokenParts[0]);
+            $tokenPayload = base64_decode($tokenParts[1]);
 
-        $token = $request->session()->get('accessToken.id_token');
+            $jwtHeader = json_decode($tokenHeader);
+            $jwtPayload = json_decode($tokenPayload);
+            
+            $phoneNumber = str_replace(' ', '', session('xeroOrg.Phones.0.PhoneCountryCode').session('xeroOrg.Phones.0.PhoneNumber'));
 
-        $tokenParts = explode(".", $token);  
-        $tokenHeader = base64_decode($tokenParts[0]);
-        $tokenPayload = base64_decode($tokenParts[1]);
-        $jwtHeader = json_decode($tokenHeader);
-        $jwtPayload = json_decode($tokenPayload);
-        
-        $phoneNumber = str_replace(' ', '', session('xeroOrg.Phones.0.PhoneCountryCode').session('xeroOrg.Phones.0.PhoneNumber'));
-
-        
-        $request->session()->put('phoneNumber', $phoneNumber);
-        $request->session()->put('jwtPayload', collect($jwtPayload)->toArray());
+            
+            $request->session()->put('phoneNumber', $phoneNumber);
+            $request->session()->put('jwtPayload', collect($jwtPayload)->toArray());
+        }
 
         //dd($request->session()->get('jwtPayload'));
         // $contact = $xero->contacts()->find('34xxxx6e-7xx5-2xx4-bxx5-6123xxxxea49');
