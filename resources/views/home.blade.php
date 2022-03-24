@@ -44,7 +44,7 @@
                                     <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('First Name') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="firstName" type="text" class="form-control" name="firstName" value="{{ session('jwtPayload.given_name') }}" required autocomplete="name" autofocus>
+                                        <input id="firstName" type="text" class="form-control" name="firstName" value="{{ session('jwtPayload.given_name') }}" required autocomplete="name" autofocus maxlength="20">
                                     </div>
                                 </div>
 
@@ -52,7 +52,7 @@
                                     <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Last Name') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="lastName" type="text" class="form-control" name="lastName" value="{{ session('jwtPayload.family_name') }}" required autocomplete="name" autofocus>
+                                        <input id="lastName" type="text" class="form-control" name="lastName" value="{{ session('jwtPayload.family_name') }}" required autocomplete="name" autofocus maxlength="20">
                                     </div>
                                 </div>
                                 
@@ -61,16 +61,28 @@
                                     <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ session('jwtPayload.email') }}" required autocomplete="email">
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ session('jwtPayload.email') }}" required autocomplete="email" maxlength="40">
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <!-- <div class="row mb-3">
                                     <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="userPhoneNumber" type="text" class="form-control" name="userPhoneNumber" value="+61" required autocomplete="name" autofocus>
                                     </div>
+                                </div> -->
+
+                                <div class="row mb-3">
+                                  <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
+                                  <div class="col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">+61</div>
+                                        </div>
+                                        <input type="text" class="form-control" name="userPhoneNumber" id="inlineFormInputGroup" placeholder="123456789" maxlength="10" required>
+                                    </div>
+                                  </div>
                                 </div>
                             </fieldset>
                                 
@@ -86,19 +98,31 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-3">
+                                <!-- <div class="row mb-3">
                                     <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
 
                                     <div class="col-md-6">
                                         <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" value="{{ session('phoneNumber') }}" required autocomplete="name" autofocus>
                                     </div>
+                                </div> -->
+
+                                <div class="row mb-3">
+                                  <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
+                                  <div class="col-md-6">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <div class="input-group-text">+61</div>
+                                        </div>
+                                        <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" value="{{ session('phoneNumber') }}" required autocomplete="name" autofocus maxlength="10">
+                                    </div>
+                                  </div>
                                 </div>
 
                                 <div class="row mb-3">
                                     <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Address') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="address" type="text" class="form-control" name="address" value="{{ session('xeroOrg.Addresses.0.AddressLine1').' '.session('xeroOrg.Addresses.0.City').' '.session('xeroOrg.Addresses.0.Region').','.session('xeroOrg.Addresses.0.Country').' '.session('xeroOrg.Addresses.0.PostalCode') }}" required autocomplete="name" autofocus>
+                                        <input id="address" type="text" class="form-control" name="address" maxlength="40" value="{{ session('xeroOrg.Addresses.0.AddressLine1').' '.session('xeroOrg.Addresses.0.City').' '.session('xeroOrg.Addresses.0.Region').','.session('xeroOrg.Addresses.0.Country').' '.session('xeroOrg.Addresses.0.PostalCode') }}" required autocomplete="name" autofocus>
                                     </div>
                                 </div>
 
@@ -149,7 +173,7 @@
                                     <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" maxlength="20" minlength="6">
                                     </div>
                                 </div>
 

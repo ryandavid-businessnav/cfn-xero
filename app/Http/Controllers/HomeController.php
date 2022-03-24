@@ -57,7 +57,7 @@ class HomeController extends Controller
             $jwtHeader = json_decode($tokenHeader);
             $jwtPayload = json_decode($tokenPayload);
             
-            $phoneNumber = str_replace(' ', '', session('xeroOrg.Phones.0.PhoneCountryCode').session('xeroOrg.Phones.0.PhoneNumber'));
+            $phoneNumber = str_replace(' ', '', session('xeroOrg.Phones.0.PhoneNumber'));
 
             
             $request->session()->put('phoneNumber', $phoneNumber);
@@ -82,7 +82,7 @@ class HomeController extends Controller
         return Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:6', 'max:20', 'confirmed'],
         ]);
     }
 
@@ -114,23 +114,38 @@ class HomeController extends Controller
             $this->refreshXeroToken($request);
         }
 
+        
+            //dd($input['phoneNumber']);
+        if($input['userPhoneNumber'][0] == "0"){
+            $convertedUserPhone = substr_replace($input['userPhoneNumber'], '+61', 0, strlen("0"));
+        }else{
+            $convertedUserPhone = '+61'.$input['userPhoneNumber'];
+        }
+
+        if($input['phoneNumber'][0] == "0"){
+            $convertedPhone = substr_replace($input['phoneNumber'], '+61', 0, strlen("0"));
+            //$convertedPhone = substr($input['userPhoneNumber'],"+61",0);
+        }else{
+            $convertedPhone = '+61'.$input['phoneNumber'];
+        }
+
         $validated = $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+
         //dd($input);
         $emailCheck = DB::table('users')->where('email', $input['email'])->first();
         //dd(($request->session()->get('tenantInfo')));
         if(collect($emailCheck)->isNotEmpty()){
             return redirect('/home')->with('status', 'Email already exist!');
         }
-
         $user = new User();
         $user->email = $input['email'];
         $user->password = Hash::make($input['password']);
         $user->first_name = $input['firstName'];
         $user->last_name = $input['lastName'];
-        $user->mobile_number = $input['userPhoneNumber'];
+        $user->mobile_number = $convertedUserPhone;
         $user->is_active = 1;
         $user->is_verified = 0;
         $user->is_phone_verified = 0;
@@ -139,6 +154,8 @@ class HomeController extends Controller
         $xeroCheck = DB::table('business_settings')->where(['xero_tenant_id' => $request->session()->get('tenantId')])->first();
         //if(collect($xeroCheck)->isEmpty()){
 
+        
+
             $businessSetting = new BusinessSetting();
             $businessSetting->user_id = $user->id;
             $businessSetting->company_name = $input['businessName'];
@@ -146,7 +163,7 @@ class HomeController extends Controller
             $businessSetting->no_of_employees = $input['numberOfEmployees'];
             $businessSetting->currency = $input['currency'];
             $businessSetting->currency = $input['currency'];
-            $businessSetting->mobile_number = $input['phoneNumber'];
+            $businessSetting->mobile_number = $convertedPhone;
             $businessSetting->trading_name = $input['businessName'];
             $businessSetting->xero_access_token = $request->session()->get('accessToken.access_token');
             $businessSetting->xero_refresh_token = $request->session()->get('accessToken.refresh_token');
