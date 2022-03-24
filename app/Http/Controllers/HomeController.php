@@ -137,7 +137,7 @@ class HomeController extends Controller
         $user->save();
 
         $xeroCheck = DB::table('business_settings')->where(['xero_tenant_id' => $request->session()->get('tenantId')])->first();
-        if(collect($xeroCheck)->isEmpty()){
+        //if(collect($xeroCheck)->isEmpty()){
 
             $businessSetting = new BusinessSetting();
             $businessSetting->user_id = $user->id;
@@ -162,16 +162,16 @@ class HomeController extends Controller
             $org->write_access = 1;
             $org->is_admin = 1;
             $org->save();
-        }else{
-            $org = new Organisation();
-            $org->business_form_id = $xeroCheck->id;
-            $org->user_id = $user->id;
-            $org->role = 'member';
-            $org->read_access = 1;
-            $org->write_access = 1;
-            $org->is_admin = 1;
-            $org->save();
-        }
+        // }else{
+        //     $org = new Organisation();
+        //     $org->business_form_id = $xeroCheck->id;
+        //     $org->user_id = $user->id;
+        //     $org->role = 'member';
+        //     $org->read_access = 1;
+        //     $org->write_access = 1;
+        //     $org->is_admin = 1;
+        //     $org->save();
+        // }
 
         $request->session()->forget('xeroOrg');
         $request->session()->forget('tenantInfo');
@@ -182,6 +182,6 @@ class HomeController extends Controller
         $request->session()->forget('jwtPayload');
         $request->session()->forget('phoneNumber');
 
-        return redirect('/home')->with('status', 'User register success!');
+        return redirect('/home')->with('status', 'User register success! Download CASHFLOWNAV on iOS or Android devices to Sign in!');
     }
 }
