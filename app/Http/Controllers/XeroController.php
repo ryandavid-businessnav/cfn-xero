@@ -120,7 +120,7 @@ class XeroController extends Controller
                 $request->session()->put('userInfo', collect($user)->toArray());
                 $request->session()->put('accessToken', collect($accessToken)->toArray());
 
-                return redirect('/home')->with('status', 'Successful Signed in via Xero! Fill out the form to register to CASHFLOWNAV!');
+                return redirect('/home')->with('status', 'Successfully Signed in via Xero! Fill out the form to register to CASHFLOWNAV!');
             // }else{
             //     return redirect('/home')->with('status', 'Organisation already exist!');
             // }

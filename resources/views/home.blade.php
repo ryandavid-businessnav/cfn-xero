@@ -110,9 +110,6 @@
                                   <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
                                   <div class="col-md-6">
                                     <div class="input-group">
-                                        <div class="input-group-prepend">
-                                          <div class="input-group-text">+61</div>
-                                        </div>
                                         <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" value="{{ session('phoneNumber') }}" required autocomplete="name" autofocus maxlength="10">
                                     </div>
                                   </div>
