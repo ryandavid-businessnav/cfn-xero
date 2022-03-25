@@ -41,7 +41,7 @@ class XeroController extends Controller
                 'client_id' => 'F6E5A2767452405A8C69BFC17DDE880D',
                 'code' => $input['code'],
                 //'redirect_uri' => 'https://xero.cashflownavfactor.com/xero/callback',
-                'redirect_uri' => 'http://localhost:8001/xero/callback',
+                'redirect_uri' => 'https://xero.cashflownavfactor.com/xero/callback',
                 'code_verifier' => 'thisismycode123thisismycode123thisismycode123thisismycode1234',
             ]
         ]);
