@@ -25,6 +25,10 @@ class XeroController extends Controller
         // Step 1 - Redirect the user to the Xero authorization URL.
         //return $this->getOAuth2()->getAuthorizationRedirect();
         return redirect('https://login.xero.com/identity/connect/authorize?response_type=code&code_challenge_method=S256&client_id=F6E5A2767452405A8C69BFC17DDE880D&scope=openid email profile accounting.settings offline_access accounting.contacts&redirect_uri=https://xero.cashflownavfactor.com/xero/callback&state=12345&code_challenge=cgA1VpCZDHQuv58Y6G_uzfPL-WtjvSkNgu6w78bM9nw');
+
+        //return redirect('https://login.xero.com/identity/connect/authorize?response_type=code&code_challenge_method=S256&client_id=F6E5A2767452405A8C69BFC17DDE880D&scope=openid email profile accounting.settings offline_access accounting.contacts&redirect_uri=http://localhost:8001/xero/callback&state=12345&code_challenge=cgA1VpCZDHQuv58Y6G_uzfPL-WtjvSkNgu6w78bM9nw');
+
+        //return redirect('https://login.xero.com/identity/connect/authorize?response_type=code&code_challenge_method=S256&client_id=F6E5A2767452405A8C69BFC17DDE880D&scope=openid email profile accounting.settings offline_access accounting.contacts&redirect_uri=http://localhost:8001/xero/callback&state=12345&code_challenge=cgA1VpCZDHQuv58Y6G_uzfPL-WtjvSkNgu6w78bM9nw');
     }
 
     public function redirectToXero(Request $request){
@@ -36,7 +40,8 @@ class XeroController extends Controller
                 'grant_type' => 'authorization_code',
                 'client_id' => 'F6E5A2767452405A8C69BFC17DDE880D',
                 'code' => $input['code'],
-                'redirect_uri' => 'https://xero.cashflownavfactor.com/xero/callback',
+                //'redirect_uri' => 'https://xero.cashflownavfactor.com/xero/callback',
+                'redirect_uri' => 'http://localhost:8001/xero/callback',
                 'code_verifier' => 'thisismycode123thisismycode123thisismycode123thisismycode1234',
             ]
         ]);
@@ -115,7 +120,7 @@ class XeroController extends Controller
                 $request->session()->put('userInfo', collect($user)->toArray());
                 $request->session()->put('accessToken', collect($accessToken)->toArray());
 
-                return redirect('/home')->with('status', 'Organisation update success!');
+                return redirect('/home')->with('status', 'Successful Signed in via Xero! Fill out the form to register to CASHFLOWNAV!');
             // }else{
             //     return redirect('/home')->with('status', 'Organisation already exist!');
             // }
@@ -183,8 +188,8 @@ class XeroController extends Controller
         // Step 2 - Capture the response from Xero, and obtain an access token.
         
         $accessToken = $this->getOAuth2()->getAccessTokenFromXeroRequest($request);
-        dd(collect($accessToken)->toArray());
-        dd($accessToken);
+        // dd(collect($accessToken)->toArray());
+        // dd($accessToken);
         // Step 3 - Retrieve the list of tenants (typically Xero organisations), and let the user select one.
         $tenants = $this->getOAuth2()->getTenants($accessToken);
         $selectedTenant = $tenants[0]; // For example purposes, we're pretending the user selected the first tenant.
