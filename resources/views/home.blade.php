@@ -88,7 +88,7 @@
                                 
                              <fieldset>
                                 <div class="text-center row mb-3">
-                                    <legend><span class="number">1</span>Your Business</legend>
+                                    <legend><span class="number">2</span>Your Business</legend>
                                 </div>
                                 <div class="row mb-3">
                                     <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Business Name') }}</label>

@@ -25,6 +25,20 @@
             margin: 0.25em 9px 0.25em 0.25em;
             vertical-align: middle;
         }
+
+        .number {
+    background-color: #5fcf80;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgb(255 255 255 / 20%);
+    border-radius: 100%;
+}
     </style>
 </head>
 <body>
