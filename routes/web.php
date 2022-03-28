@@ -24,7 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/test', [App\Http\Controllers\XeroController::class, 'test'])->name('test');
 Route::post('/save-user', [App\Http\Controllers\HomeController::class, 'saveUser'])->name('saveUser');
 //Route::get('/manage/xero', [App\Http\Controllers\XeroController::class, 'redirectUserToXero'])->name('redirectUserToXero');
-Route::get('/manage/xero', [App\Http\Controllers\XeroController::class, 'redirectUserToXero'])->name('redirectUserToXero');
+//Route::get('/manage/xero', [App\Http\Controllers\XeroController::class, 'redirectUserToXero'])->name('redirectUserToXero');
 Route::get('/xero/callback', [App\Http\Controllers\XeroController::class, 'redirectToXero'])->name('redirectToXero');
 Route::get('/xero/auth/callback', [App\Http\Controllers\XeroController::class, 'handleCallbackFromXero'])->name('handleCallbackFromXero');
 
