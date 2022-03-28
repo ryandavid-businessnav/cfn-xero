@@ -29,9 +29,9 @@ class XeroController extends Controller
         $code_challenge = base64_encode(pack('H*', $hash));
         $codeChallenge = strtr(rtrim($code_challenge, '='), '+/', '-_');
 
-        //return redirect('https://login.xero.com/identity/connect/authorize?response_type=code&code_challenge_method=S256&client_id=F6E5A2767452405A8C69BFC17DDE880D&scope=openid email profile accounting.settings offline_access accounting.contacts&redirect_uri=https://xero.cashflownavfactor.com//xero/callback&state=12345&code_challenge='.$codeChallenge);
+        return redirect('https://login.xero.com/identity/connect/authorize?response_type=code&code_challenge_method=S256&client_id=F6E5A2767452405A8C69BFC17DDE880D&scope=openid email profile accounting.settings offline_access accounting.contacts&redirect_uri=https://xero.cashflownavfactor.com//xero/callback&state=12345&code_challenge='.$codeChallenge);
 
-        return redirect('https://login.xero.com/identity/connect/authorize?response_type=code&code_challenge_method=S256&client_id=F6E5A2767452405A8C69BFC17DDE880D&scope=openid email profile accounting.settings offline_access accounting.contacts&redirect_uri=http://localhost:8001/xero/callback&state=12345&code_challenge='.$codeChallenge);
+        //return redirect('https://login.xero.com/identity/connect/authorize?response_type=code&code_challenge_method=S256&client_id=F6E5A2767452405A8C69BFC17DDE880D&scope=openid email profile accounting.settings offline_access accounting.contacts&redirect_uri=http://localhost:8001/xero/callback&state=12345&code_challenge='.$codeChallenge);
     }
 
     public function redirectToXero(Request $request){
