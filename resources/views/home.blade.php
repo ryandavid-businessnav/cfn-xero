@@ -74,13 +74,13 @@
                                 </div> -->
 
                                 <div class="row mb-3">
-                                  <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
+                                  <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Mobile Number') }}</label>
                                   <div class="col-md-6">
                                     <div class="input-group">
                                         <div class="input-group-prepend">
                                           <div class="input-group-text">+61</div>
                                         </div>
-                                        <input type="text" class="form-control" name="userPhoneNumber" id="inlineFormInputGroup" placeholder="123456789" maxlength="10" required>
+                                        <input type="text" class="form-control" name="userPhoneNumber" id="inlineFormInputGroup" placeholder="123456789" maxlength="10">
                                     </div>
                                   </div>
                                 </div>
@@ -107,10 +107,10 @@
                                 </div> -->
 
                                 <div class="row mb-3">
-                                  <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
+                                  <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Mobile Number') }}</label>
                                   <div class="col-md-6">
                                     <div class="input-group">
-                                        <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" value="{{ session('phoneNumber') }}" required autocomplete="name" autofocus maxlength="10">
+                                        <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" value="{{ session('phoneNumber') }}" autofocus maxlength="10">
                                     </div>
                                   </div>
                                 </div>

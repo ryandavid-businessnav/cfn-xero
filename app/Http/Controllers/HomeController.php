@@ -116,17 +116,20 @@ class HomeController extends Controller
 
         
             //dd($input['phoneNumber']);
-        if($input['userPhoneNumber'][0] == "0"){
-            $convertedUserPhone = substr_replace($input['userPhoneNumber'], '+61', 0, strlen("0"));
-        }else{
-            $convertedUserPhone = '+61'.$input['userPhoneNumber'];
+        if(collect($input['userPhoneNumber'])->isNotEmpty()){
+            if($input['userPhoneNumber'][0] == "0"){
+                $convertedUserPhone = substr_replace($input['userPhoneNumber'], '+61', 0, strlen("0"));
+            }else{
+                $convertedUserPhone = '+61'.$input['userPhoneNumber'];
+            }
         }
-
-        if($input['phoneNumber'][0] == "0"){
-            $convertedPhone = substr_replace($input['phoneNumber'], '+61', 0, strlen("0"));
-            //$convertedPhone = substr($input['userPhoneNumber'],"+61",0);
-        }else{
-            $convertedPhone = '+61'.$input['phoneNumber'];
+        if(collect($input['userPhoneNumber'])->isNotEmpty()){
+            if($input['phoneNumber'][0] == "0"){
+                $convertedPhone = substr_replace($input['phoneNumber'], '+61', 0, strlen("0"));
+                //$convertedPhone = substr($input['userPhoneNumber'],"+61",0);
+            }else{
+                $convertedPhone = '+61'.$input['phoneNumber'];
+            }
         }
 
         $validated = $request->validate([
