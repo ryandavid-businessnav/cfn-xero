@@ -107,7 +107,7 @@
                                 </div> -->
 
                                 <div class="row mb-3">
-                                  <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Mobile Number') }}</label>
+                                  <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Phone Number') }}</label>
                                   <div class="col-md-6">
                                     <div class="input-group">
                                         <input id="phoneNumber" type="text" class="form-control" name="phoneNumber" value="{{ session('phoneNumber') }}" autofocus maxlength="10">
@@ -154,18 +154,192 @@
 
                                     <div class="col-md-6">
                                         <select class="form-control" name="currency">
-                                            <option>AUD</option>
-                                            <option>EUR</option>
-                                            <option>USD</option>
-                                            <option>NZD</option>
-                                            <option>GBP</option>
-                                            <option>MXN</option>
-                                            <option>CAD</option>
+                                            <option>AUD - Australian Dollar</option>
+                                            <option>EUR - Euro</option>
+                                            <option>USD - US Dollar</option>
+                                            <option>NZD - New Zealand Dollar</option>
+                                            <option>GBP - Sterling Pound</option>
+                                            <option>MXN - Mexican Peso</option>
+                                            <option>CAD - Canadian Dollar</option>
                                             <option>OTHER</option>
                                         </select>
                                     </div>
                                 </div>
 
+                                <div class="row mb-3">
+                                    <label for="anzic_code" class="col-md-4 col-form-label text-md-end">{{ __('Anzic Code') }}</label>
+
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="anzic_code" v-model="anzic">
+                                            <option value="agriculture_forestry_fishing">Agriculture, forestry and fishing</option> 
+                                            <option value="mining" >Mining</option> 
+                                            <option value="manufacturing" >Manufacturing</option> 
+                                            <option value="electricity_gas_water_waste_services" >Electricity, gas, water and waste services</option> 
+                                            <option value="construction" >Construction</option> 
+                                            <option value="wholesale_trade" >Wholesale trade</option> 
+                                            <option value="retail_trade" >Retail trade</option> 
+                                            <option value="accommodation_food_services" >Accommodation and food services</option> 
+                                            <option value="transport_postal_warehousing" >Transport, postal and warehousing</option> 
+                                            <option value="information_media_telecommunications" >Information media and telecommunications</option> 
+                                            <option value="financial_insurance_services" >Financial and insurance services</option> 
+                                            <option value="rental_hiring_real_estate_services" >Rental hiring and real estate services</option> 
+                                            <option value="professional_scientific_technical_services" >Professional, scientific and technical services</option> 
+                                            <option value="administrative_support_services" >Administrative and support services</option> 
+                                            <option value="public_administration_safety" >Public administration and safety</option> 
+                                            <option value="education_training" >Education and training</option> 
+                                            <option value="health_care_social_assistance" >Health care and social assistance</option> 
+                                            <option value="arts_recreation_services" >Arts and recreation services</option> 
+                                            <option value="other_services">Other services</option> 
+                                        </select>
+                                    </div>
+                                </div>
+
+                                 <div class="row mb-3" v-if="anzic">
+                                    <label for="anzic_subdivision" class="col-md-4 col-form-label text-md-end">{{ __('Anzic Sub Division') }}</label>
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'agriculture_forestry_fishing'">
+                                            <option>Agriculture</option>
+                                            <option>Aquaculture</option>
+                                            <option>Forestry and Logging</option>
+                                            <option>Fishing, Hunting and Trapping</option>
+                                            <option>Agriculture, Forestry, and Fishing Support Services</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'mining'">
+                                            <option>Coal Mining</option>
+                                            <option>Oil and Gas Extraction</option>
+                                            <option>Metal Ore Mining</option>
+                                            <option>Non-Metallic Minteral Mining and Quarrying</option>
+                                            <option>Exploration and Other Mining Support Services</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'manufacturing'">
+                                            <option>Food Product Manufacturing</option>
+                                            <option>Beverage and Tobacco Product Manufacturing</option>
+                                            <option>Textile, Leather, Clothing, and Footwear Manufacturing</option>
+                                            <option>Wool Product Manufacturing</option>
+                                            <option>Pulp, Paper, and Converted Paper Product Manufacturing</option>
+                                            <option>Printing (including the Reproduction of Recorded Media)</option>
+                                            <option>Basic Chemical and Chemical Product Manufacturing</option>
+                                            <option>Polymer Product and Rubber Product Manufacturing</option>
+                                            <option>Non-Metallic Mineral Product Manufacturing</option>
+                                            <option>Primary Metal and Metal Product Manufacturing</option>
+                                            <option>Fabricated Metal Product Manufacturing</option>
+                                            <option>Transport Equipment Manufacturing</option>
+                                            <option>Machinery and Equipment Manufacturing</option>
+                                            <option>Furniture and Other Manufacturing</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'electricity_gas_water_waste_services'">
+                                            <option>Electrical Supply</option>
+                                            <option>Gas Supply</option>
+                                            <option>Water Supply, Sewerage, and Drainage Services</option>
+                                            <option>Waste Collection, Treatment, and Disposal Services</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'construction'">
+                                            <option>Building Construction>/option>
+                                            <option>Heavy and Civil Engineering Construction>/option>
+                                            <option>Construction Services>/option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'wholesale_trade'">
+                                            <option>Basic Material Wholesaling</option>
+                                            <option>Machinery and Equipment Wholsaling</option>
+                                            <option>Motor Vehicle and Motor Vehicle Parts Wholesaling</option>
+                                            <option>Grocery, Liquoe, and Tobacco Product Wholesaling</option>
+                                            <option>Other Goods Wholesaling</option>
+                                            <option>Commission-Based Wholesaling</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'retail_trade'">
+                                            <option>Motor Vehicle and Motor Vehicle Parts Retailing</option>
+                                            <option>Fuel Retailing</option>
+                                            <option>Food Retailing</option>
+                                            <option>Other Store-Based Retailing</option>
+                                            <option>Food and Beverage Services</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'accommodation_food_services'">
+                                            <option>Accommodation</option>
+                                            <option>Food and Beverage Services</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'transport_postal_warehousing'">
+                                            <option>Road Transport</option>
+                                            <option>Rail Transport</option>
+                                            <option>Water Transport</option>
+                                            <option>Air and Space Transport</option>
+                                            <option>Other Transport</option>
+                                            <option>Postal and Courier Pick-up and Delivery Services</option>
+                                            <option>Transport Support Services</option>
+                                            <option>Warehousing and Storage Services</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'information_media_telecommunications'">
+                                            <option>Publishing (except Internet and Music Publishing)</option>
+                                            <option>Motion Picture and Sound Recording Activities</option>
+                                            <option>Broadcasting (except Internet)</option>
+                                            <option>Internet Publishing and Broadcasting</option>
+                                            <option>Telecommunications Services</option>
+                                            <option>Internet Service Providers, Web Search Portals, and Data Processing Services</option>
+                                            <option>Library and Other Information Services</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'financial_insurance_services'">
+                                            <option>Finance</option>
+                                            <option>Insurance and Superannuation Funds</option>
+                                            <option>Auxiliary Finance and Insurance Services</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'rental_hiring_real_estate_services'">
+                                            <option>Rental and Hiring Services (except Real Estate)</option>
+                                            <option>Property Operators and Real Estate Services</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'professional_scientific_technical_services'">
+                                            <option>Professional, Scientific, and Technical Services (Except Computer System Design and Related Systems)</option>
+                                            <option>Computer System Design and Related Systems</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'administrative_support_services'">
+                                            <option>Administrative Services</option>
+                                            <option>Building Cleaning, Pest Control, and Other Support Services</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'public_administration_safety'">
+                                            <option>Public Administration</option>
+                                            <option>Defence</option>
+                                            <option>Public Order, Safety, and Regulator Services</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'education_training'">
+                                            <option>Preschool and School Education</option>
+                                            <option>Tertiary Education</option>
+                                            <option>Adult, Community, and Other Education</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'health_care_social_assistance'">
+                                            <option>Hospitals</option>
+                                            <option>Medical and Other Health Care Services</option>
+                                            <option>Residential Care Services</option>
+                                            <option>Social Assistance Services</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'arts_recreation_services'">
+                                            <option>Heritage Activities</option>
+                                            <option>Creative and Performing Arts Activities</option>
+                                            <option>Sports and Recreation Activities</option>
+                                            <option>Gambling Activities</option>
+                                        </select>
+
+                                        <select class="form-control" name="anzic_subdivision" v-if="anzic == 'other_services'">
+                                            <option>Repair and Maintenance</option>
+                                            <option>Personal and Other Services</option>
+                                            <option>Private Households Employing Staff and Undifferentiated Goods - and Service-Producing Activities of Households for Own Use</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="row mb-3">
                                     <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
@@ -181,10 +355,19 @@
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                                     </div>
                                 </div>
-                            </fieldset>
 
+
+                                <br/> 
+                                <div class="row mb-3">
+                                    <div class="col-md-6 offset-md-3" style="padding-left:6%">
+                                        <a href="https://businessnav.com/cashflownav-terms/" class="col-md-3">Terms and Conditions | </a>
+                                        <a href="https://businessnav.com/cashflownav-privacy/" class="col-md-3">Privacy and Policy</a>
+                                    </div>
+                                </div>
+
+                            </fieldset>
                             <div class="row mb-0">
-                                <div class="col-md-6 offset-md-4">
+                                <div class="col-md-6 offset-md-5">
                                     <button type="submit" class="btn btn-primary">
                                         {{ __('Register') }}
                                     </button>

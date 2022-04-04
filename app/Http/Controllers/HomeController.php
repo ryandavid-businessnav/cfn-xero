@@ -113,9 +113,10 @@ class HomeController extends Controller
         }else{
             $this->refreshXeroToken($request);
         }
-
+        dd($input);
         $convertedUserPhone = '';
-        
+        $convertedPhone = '';
+
             //dd($input['phoneNumber']);
         if(collect($input['userPhoneNumber'])->isNotEmpty()){
             if($input['userPhoneNumber'][0] == "0"){
@@ -166,7 +167,8 @@ class HomeController extends Controller
             $businessSetting->address = $input['address'];
             $businessSetting->no_of_employees = $input['numberOfEmployees'];
             $businessSetting->currency = $input['currency'];
-            $businessSetting->currency = $input['currency'];
+            $businessSetting->anzic_division = $input['anzic_code'];
+            $businessSetting->anzic_subdivision = $input['anzic_subdivision'];
             $businessSetting->mobile_number = $convertedPhone;
             $businessSetting->trading_name = $input['businessName'];
             $businessSetting->xero_access_token = $request->session()->get('accessToken.access_token');
