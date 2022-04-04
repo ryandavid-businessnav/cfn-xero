@@ -113,7 +113,7 @@ class HomeController extends Controller
         }else{
             $this->refreshXeroToken($request);
         }
-        dd($input);
+        
         $convertedUserPhone = '';
         $convertedPhone = '';
 
