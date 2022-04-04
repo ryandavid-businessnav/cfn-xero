@@ -114,6 +114,7 @@ class HomeController extends Controller
             $this->refreshXeroToken($request);
         }
 
+        $convertedUserPhone = '';
         
             //dd($input['phoneNumber']);
         if(collect($input['userPhoneNumber'])->isNotEmpty()){
