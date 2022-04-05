@@ -167,7 +167,7 @@
                                 </div>
 
                                 <div class="row mb-3">
-                                    <label for="anzic_code" class="col-md-4 col-form-label text-md-end">{{ __('Anzic Code') }}</label>
+                                    <label for="anzic_code" class="col-md-4 col-form-label text-md-end">{{ __('ANZSIC Code') }}</label>
 
                                     <div class="col-md-6">
                                         <select class="form-control" name="anzic_code" v-model="anzic">
@@ -195,7 +195,7 @@
                                 </div>
 
                                  <div class="row mb-3" v-if="anzic">
-                                    <label for="anzic_subdivision" class="col-md-4 col-form-label text-md-end">{{ __('Anzic Sub Division') }}</label>
+                                    <label for="anzic_subdivision" class="col-md-4 col-form-label text-md-end">{{ __('ANZSIC Sub Division') }}</label>
                                     <div class="col-md-6">
                                         <select class="form-control" name="anzic_subdivision" v-if="anzic == 'agriculture_forestry_fishing'">
                                             <option>Agriculture</option>

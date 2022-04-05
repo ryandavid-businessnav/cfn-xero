@@ -125,7 +125,7 @@ class HomeController extends Controller
                 $convertedUserPhone = '+61'.$input['userPhoneNumber'];
             }
         }
-        if(collect($input['userPhoneNumber'])->isNotEmpty()){
+        if(collect($input['phoneNumber'])->isNotEmpty()){
             if($input['phoneNumber'][0] == "0"){
                 $convertedPhone = substr_replace($input['phoneNumber'], '+61', 0, strlen("0"));
                 //$convertedPhone = substr($input['userPhoneNumber'],"+61",0);
