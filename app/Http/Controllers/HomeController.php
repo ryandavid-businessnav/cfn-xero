@@ -139,7 +139,7 @@ class HomeController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        $phoneCheck = DB::table('users')->('mobile_number', $convertedPhone)->first();
+        $phoneCheck = DB::table('users')->where('mobile_number', $convertedPhone)->first();
         if(collect($phoneCheck)->isNotEmpty()){
             return redirect('/home')->with('status', 'Mobile number already exist!');
         }
