@@ -113,7 +113,7 @@ class HomeController extends Controller
         }else{
             $this->refreshXeroToken($request);
         }
-        
+
         $convertedUserPhone = '';
         $convertedPhone = '';
 
@@ -139,9 +139,11 @@ class HomeController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-        //dd($input);
+        $phoneCheck = DB::table('users')->('mobile_number', $convertedPhone)->first();
+        if(collect($emailCheck)->isNotEmpty()){
+            return redirect('/home')->with('status', 'Mobile number already exist!');
+        }
         $emailCheck = DB::table('users')->where('email', $input['email'])->first();
-        //dd(($request->session()->get('tenantInfo')));
         if(collect($emailCheck)->isNotEmpty()){
             return redirect('/home')->with('status', 'Email already exist!');
         }
