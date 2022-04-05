@@ -140,7 +140,7 @@ class HomeController extends Controller
         ]);
 
         $phoneCheck = DB::table('users')->('mobile_number', $convertedPhone)->first();
-        if(collect($emailCheck)->isNotEmpty()){
+        if(collect($phoneCheck)->isNotEmpty()){
             return redirect('/home')->with('status', 'Mobile number already exist!');
         }
         $emailCheck = DB::table('users')->where('email', $input['email'])->first();
