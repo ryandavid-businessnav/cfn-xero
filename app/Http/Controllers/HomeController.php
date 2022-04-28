@@ -156,6 +156,7 @@ class HomeController extends Controller
         $user->is_active = 1;
         $user->is_verified = 0;
         $user->is_phone_verified = 0;
+        $user->xero_userid = $request->session()->get('jwtPayload.xero_userid');
         $user->save();
 
         $xeroCheck = DB::table('business_settings')->where(['xero_tenant_id' => $request->session()->get('tenantId')])->first();
