@@ -139,9 +139,11 @@ class HomeController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
         //dd($convertedUserPhone);
-        $phoneCheck = DB::table('users')->where('mobile_number', $convertedUserPhone)->first();
-        if(collect($phoneCheck)->isNotEmpty()){
-            return redirect('/home')->with('error_status', 'Mobile number already exist!');
+        if(collect($input['userPhoneNumber'])->isNotEmpty()){
+            $phoneCheck = DB::table('users')->where('mobile_number', $convertedUserPhone)->first();
+            if(collect($phoneCheck)->isNotEmpty()){
+                return redirect('/home')->with('error_status', 'Mobile number already exist!');
+            }
         }
         $emailCheck = DB::table('users')->where('email', $input['email'])->first();
         if(collect($emailCheck)->isNotEmpty()){
