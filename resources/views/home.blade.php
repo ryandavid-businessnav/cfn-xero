@@ -135,22 +135,34 @@
 
                                     <div class="col-md-6">
                                         <div class="form-check">
-                                          <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios1" value="0-50" checked>
+                                          <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios1" value="01-9" checked>
                                           <label class="form-check-label" for="exampleRadios1">
-                                            0-50
+                                            1-9
                                           </label>
                                         </div>
                                         <div class="form-check">
-                                          <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios2" value="50-100">
+                                          <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios2" value="10-49">
                                           <label class="form-check-label" for="exampleRadios2">
-                                            50-100
+                                            10-49
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios2" value="50-99">
+                                          <label class="form-check-label" for="exampleRadios2">
+                                            50-99
+                                          </label>
+                                        </div>
+                                        <div class="form-check">
+                                          <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios2" value="100-499">
+                                          <label class="form-check-label" for="exampleRadios2">
+                                            100-499
                                           </label>
                                         </div>
 
                                         <div class="form-check">
-                                          <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios2" value="100+">
+                                          <input class="form-check-input" type="radio" name="numberOfEmployees" id="exampleRadios2" value="500+">
                                           <label class="form-check-label" for="exampleRadios2">
-                                            100+
+                                            500+
                                           </label>
                                         </div>
                                     </div>
